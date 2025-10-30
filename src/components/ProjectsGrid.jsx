@@ -1,87 +1,81 @@
-import React from 'react'
+import React from "react";
 
 const projects = [
   {
-    title: 'Redstone Ops Center',
-    desc: 'Pipeline automation that triggers builds faster than a repeater clock. Reduced deploy time by 60%.',
-    badge: '64',
-    tag: 'Automation',
+    title: "Fortune III — Data Mining",
+    desc: "Turning raw data into diamonds with clean pipelines and a sprinkle of enchantment.",
+    tag: "Diamond Pickaxe",
+    color: "from-cyan-400 to-emerald-400",
   },
   {
-    title: 'Ender Chest Sync',
-    desc: 'Real-time data sync across regions, as reliable as your favorite temporary storage. Sub-100ms replication.',
-    badge: '16',
-    tag: 'Realtime',
+    title: "Redstone Automation",
+    desc: "Event-driven services and CI/CD that tick like a perfect observer clock.",
+    tag: "Redstone Dust",
+    color: "from-red-400 to-rose-500",
   },
   {
-    title: 'Nether Portal Analytics',
-    desc: 'Event ingestion that travels far and fast. 8x compression and blazing query speed.',
-    badge: '8',
-    tag: 'Analytics',
+    title: "Cartographer’s Map",
+    desc: "Interactive maps and dashboards that reveal the world chunk by chunk.",
+    tag: "Cartography Table",
+    color: "from-amber-300 to-yellow-500",
   },
   {
-    title: 'Beacon UI Kit',
-    desc: 'Accessibility-first React components with an enchanting glint and smooth transitions.',
-    badge: '32',
-    tag: 'Frontend',
+    title: "Ender Link",
+    desc: "Latency-hopping APIs that feel like teleportation across dimensions.",
+    tag: "Ender Pearl",
+    color: "from-fuchsia-400 to-purple-600",
   },
-]
+];
 
-export default function ProjectsGrid() {
+function Card({ title, desc, tag, color }) {
   return (
-    <section id="projects" className="py-16 relative">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-50 mc-font tracking-wide drop-shadow-[0_2px_0_rgba(0,0,0,0.35)]">
-          Projects & Builds
-        </h2>
-        <p className="text-zinc-200/90 mt-2 max-w-2xl">
-          Sneaky references for the seasoned crafters: try hovering items, check the stack counts, and mind the creepers.
-        </p>
-
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p, i) => (
-            <ProjectCard key={i} {...p} />
+    <article className="group relative border border-zinc-800 bg-zinc-950 hover:bg-zinc-900 transition-colors">
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" style={{
+        backgroundImage: "linear-gradient(120deg, rgba(255,255,255,0.08), transparent 40%)",
+      }} />
+      <div className="p-5">
+        <div className={`inline-flex items-center gap-2 text-[11px] tracking-wider uppercase bg-gradient-to-r ${color} text-black px-2 py-1 border border-black/30`}> 
+          <span>{tag}</span>
+        </div>
+        <h3 className="mt-3 text-xl font-semibold">{title}</h3>
+        <p className="mt-2 text-zinc-300 text-sm">{desc}</p>
+        <div className="mt-5 flex items-center gap-2 text-xs text-zinc-400">
+          <span className="h-3 w-3 bg-emerald-500 border border-emerald-800" />
+          <span>Sneaky reference: hold F3 for details</span>
+        </div>
+      </div>
+      <div className="px-5 pb-5">
+        <div className="grid grid-cols-5 gap-2">
+          {new Array(5).fill(0).map((_, i) => (
+            <div key={i} className="h-10 border border-zinc-800 bg-zinc-900 group-hover:bg-zinc-800 transition-colors" />
           ))}
         </div>
       </div>
-    </section>
-  )
+    </article>
+  );
 }
 
-function ProjectCard({ title, desc, badge, tag }) {
+export default function ProjectsGrid() {
   return (
-    <article className="relative rounded-md overflow-hidden ui-panel pixel-border">
-      <div className="relative p-5">
-        <div className="relative h-36 rounded-sm overflow-hidden bg-gradient-to-br from-emerald-700 to-emerald-900 pixel-border">
-          <div className="absolute inset-0 opacity-60" style={{ backgroundImage: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 45%, rgba(255,255,255,0.25) 55%, transparent 100%)`, transform: 'skewX(-15deg)' }}>
-            <div className="absolute top-0 left-[-150%] w-[300%] h-full" style={{ animation: 'enchant-glint 2.8s linear infinite' }} />
-          </div>
-          <div className="absolute bottom-1 right-2 text-right text-[13px] font-bold text-zinc-100 drop-shadow-[0_2px_0_rgba(0,0,0,0.45)]">
-            {badge}
-          </div>
-          <div className="absolute top-2 left-2 text-[11px] uppercase tracking-widest bg-black/40 text-white px-2 py-0.5 rounded-sm">
-            {tag}
-          </div>
-          <div className="absolute inset-0 grid grid-cols-6 grid-rows-3 gap-0 opacity-25" aria-hidden>
-            {Array.from({ length: 18 }).map((_, idx) => (
-              <div key={idx} className={(idx % 2 ? 'bg-emerald-800/60' : 'bg-emerald-950/40')} />
-            ))}
-          </div>
+    <div>
+      <div className="flex items-end justify-between mb-6">
+        <div>
+          <h2 className="text-2xl font-bold">Projects</h2>
+          <p className="text-sm text-zinc-400">No need to sleep to set your spawn point—just bookmark this page.</p>
         </div>
-        <h3 className="mt-4 text-xl font-bold text-zinc-50">{title}</h3>
-        <p className="mt-2 text-zinc-300 leading-relaxed">{desc}</p>
-        <div className="mt-4 flex items-center gap-2">
-          <span className="inline-block text-xs text-emerald-300 bg-emerald-900/50 border border-emerald-700/40 px-2 py-1 rounded">
-            Efficiency V
-          </span>
-          <span className="inline-block text-xs text-indigo-300 bg-indigo-900/40 border border-indigo-700/40 px-2 py-1 rounded">
-            Unbreaking III
-          </span>
-        </div>
+        <a
+          id="contact"
+          href="mailto:hello@example.com"
+          className="text-sm underline decoration-dotted underline-offset-4 text-emerald-300 hover:text-emerald-200"
+        >
+          Send a carrier chicken
+        </a>
       </div>
-      <div className="absolute -top-2 -right-2 rotate-6 select-none text-[10px] bg-amber-400 text-black px-2 py-1 font-bold shadow-md">
-        Achievement Get!
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {projects.map((p) => (
+          <Card key={p.title} {...p} />
+        ))}
       </div>
-    </article>
-  )
+    </div>
+  );
 }

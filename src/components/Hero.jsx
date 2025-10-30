@@ -1,76 +1,55 @@
-import React from 'react'
+import React from "react";
 
-export default function Hero() {
+export default function Hero({ onPrimaryAction }) {
   return (
-    <section className="pt-28 pb-20 relative">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="ui-panel rounded-md p-8 pixel-border relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none" aria-hidden>
-            <Clouds />
-          </div>
-          <div className="relative z-10">
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-zinc-50 drop-shadow-[0_2px_0_rgba(0,0,0,0.35)] mc-font tracking-wide">
-              Hi, I’m Sam – Full‑Stack Crafter
+    <section className="relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight">
+              Mining ideas. Crafting experiences.
             </h1>
-            <p className="mt-4 text-zinc-200/90 max-w-2xl">
-              I build performant web experiences and scalable systems. Think of me as your friendly neighborhood redstone engineer, automating the boring stuff and polishing the blocks that matter.
+            <p className="mt-4 text-zinc-300">
+              Hi, I’m a developer and designer who loves turning redstone logic into real-world software. This portfolio hides a few Easter eggs for players who know their way around the Overworld, Nether, and End.
             </p>
-
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#projects" className="btn-blocky inline-flex items-center gap-2 rounded-md bg-emerald-500 hover:bg-emerald-400 text-black font-semibold px-5 py-3">
-                Craft Projects
-                <span className="text-xs bg-black/20 text-black px-2 py-0.5 rounded">W</span>
-              </a>
-              <a href="#contact" className="btn-blocky inline-flex items-center gap-2 rounded-md bg-amber-400 hover:bg-amber-300 text-black font-semibold px-5 py-3">
-                Open Chest
-                <span className="text-xs bg-black/20 text-black px-2 py-0.5 rounded">E</span>
+              <button
+                onClick={onPrimaryAction}
+                className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 active:translate-y-[1px] border border-emerald-800 shadow-[0_2px_0_0_rgba(0,0,0,0.6)] transition-colors"
+              >
+                Open Crafting Table
+              </button>
+              <a
+                href="#contact"
+                className="px-5 py-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200"
+              >
+                Read the Enchanting Book
               </a>
             </div>
-
-            <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[
-                { label: 'Redstone Automation', value: 'Workflows & CI' },
-                { label: 'Fortified Builds', value: 'Type-safe & tested' },
-                { label: 'Nether-fast', value: '~50ms APIs' },
-                { label: 'Silk Touch UX', value: 'Smooth interactions' },
-              ].map((s) => (
-                <Stat key={s.label} {...s} />
-              ))}
+            <ul className="mt-6 text-sm text-zinc-400 space-y-1 list-disc list-inside">
+              <li>Seed: 404-NotChunkAligned</li>
+              <li>Difficulty: Hard (but peaceful vibes)</li>
+              <li>Game rule: keepInventory = true</li>
+            </ul>
+          </div>
+          <div className="relative">
+            <div className="aspect-[4/3] w-full border border-zinc-800 bg-zinc-950 overflow-hidden">
+              <div className="absolute inset-0" style={{
+                backgroundImage: "linear-gradient(0deg, #222 0 40%, #4ade80 40% 60%, #1f2937 60%)",
+                imageRendering: "pixelated",
+              }} />
+              <div className="absolute inset-x-0 bottom-0 p-4 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-5 w-5 bg-yellow-400 border border-yellow-700" />
+                  <span className="text-xs text-zinc-300">Day 1 • Biome: Plains</span>
+                </div>
+                <span className="text-xs text-zinc-400">The sun is setting...</span>
+              </div>
             </div>
+            <p className="mt-3 text-xs text-zinc-400">Tip: Always carry a water bucket. Just in case you accidentally dig straight down.</p>
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-function Stat({ label, value }) {
-  return (
-    <div className="rounded-md bg-zinc-900/60 border border-zinc-700/40 p-3">
-      <div className="text-zinc-300 text-sm">{label}</div>
-      <div className="text-zinc-50 font-semibold">{value}</div>
-    </div>
-  )
-}
-
-function Clouds() {
-  return (
-    <svg className="w-full h-full" viewBox="0 0 600 300" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="g" x1="0" x2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.18)" />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.0)" />
-        </linearGradient>
-      </defs>
-      <rect x="-200" y="20" width="300" height="50" fill="url(#g)">
-        <animate attributeName="x" from="-200" to="600" dur="16s" repeatCount="indefinite" />
-      </rect>
-      <rect x="-300" y="90" width="260" height="40" fill="url(#g)">
-        <animate attributeName="x" from="-300" to="600" dur="22s" repeatCount="indefinite" />
-      </rect>
-      <rect x="-250" y="150" width="320" height="45" fill="url(#g)">
-        <animate attributeName="x" from="-250" to="600" dur="18s" repeatCount="indefinite" />
-      </rect>
-    </svg>
-  )
+  );
 }

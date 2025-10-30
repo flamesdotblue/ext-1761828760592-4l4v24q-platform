@@ -1,34 +1,48 @@
-import React from 'react'
+import React, { useState } from "react";
 
 const slots = [
-  { key: '1', item: '💎', label: 'Diamond Standard' },
-  { key: '2', item: '🧱', label: 'Solid Architecture' },
-  { key: '3', item: '⚙️', label: 'DevOps' },
-  { key: '4', item: '🧪', label: 'Testing' },
-  { key: '5', item: '🌐', label: 'Full‑stack' },
-  { key: '6', item: '📦', label: 'APIs' },
-  { key: '7', item: '🔥', label: 'Performance' },
-  { key: '8', item: '🔒', label: 'Security' },
-  { key: '9', item: '🧭', label: 'DX & Docs' },
-]
+  { id: 1, label: "Pickaxe", emoji: "⛏️" },
+  { id: 2, label: "Blocks", emoji: "🧱" },
+  { id: 3, label: "Torch", emoji: "🔥" },
+  { id: 4, label: "Map", emoji: "🗺️" },
+  { id: 5, label: "Pearl", emoji: "🟣" },
+  { id: 6, label: "Food", emoji: "🍞" },
+  { id: 7, label: "Axe", emoji: "🪓" },
+  { id: 8, label: "Book", emoji: "📘" },
+  { id: 9, label: "Totem", emoji: "🟨" },
+];
 
 export default function InventoryBar() {
+  const [selected, setSelected] = useState(1);
+
   return (
-    <div className="fixed bottom-4 inset-x-0 z-40 flex justify-center">
-      <nav aria-label="Hotbar" className="ui-panel pixel-border rounded-md px-3 py-2 backdrop-blur">
-        <ul className="grid grid-cols-9 gap-2">
-          {slots.map((s, i) => (
-            <li key={s.key} className={`w-12 h-12 rounded-sm bg-zinc-900/70 hotbar-slot relative ${i === 1 ? 'hotbar-selected' : ''}`}>
-              <span className="absolute inset-0 grid place-items-center text-xl" aria-hidden>{s.item}</span>
-              <span className="sr-only">{s.label}</span>
-              <span className="absolute bottom-0 right-1 text-[10px] text-zinc-200/90">{s.key}</span>
-            </li>
+    <nav className="fixed inset-x-0 bottom-4 z-40">
+      <div className="max-w-2xl mx-auto px-4">
+        <div className="bg-zinc-950/90 backdrop-blur border border-zinc-800 p-2 flex gap-2">
+          {slots.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setSelected(s.id)}
+              title={s.label}
+              className={`relative h-12 w-12 border text-lg select-none grid place-items-center transition-colors ${
+                selected === s.id
+                  ? "border-emerald-400 bg-zinc-900"
+                  : "border-zinc-800 bg-zinc-950 hover:bg-zinc-900"
+              }`}
+            >
+              <span className="pointer-events-none" aria-hidden>{s.emoji}</span>
+              {selected === s.id && (
+                <span className="absolute -top-2 -right-2 text-[10px] bg-emerald-500 text-black px-1 border border-emerald-800">
+                  1
+                </span>
+              )}
+            </button>
           ))}
-        </ul>
-      </nav>
-      <div className="absolute -top-6 text-xs text-zinc-100/90 bg-black/50 px-2 py-1 rounded pixel-border">
-        ssss... don’t look behind you
+        </div>
+        <div className="px-2 pt-1 text-center text-xs text-zinc-400 select-none">
+          Hotbar: Press 1-9 (mentally) to switch items. Don’t forget your shield.
+        </div>
       </div>
-    </div>
-  )
+    </nav>
+  );
 }
